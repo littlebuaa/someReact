@@ -1,0 +1,108 @@
+
+<html>
+<head>
+    <title> Hello World</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+ 
+</head>
+
+<body>
+    <div class="container"> 
+        <div class = "row">
+            <div class = "col-md-12">
+                <div id="root"> </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script  type='text/babel'>
+        class Temp extends React.Component {
+            constructor(props){
+                super(props);
+                this.changeText = this.changeText.bind(this);
+                this.state ={};
+                this.state.text = "Learn More";
+                this.state.todos = [
+                    {id:1,   name: "Meeting Indus"},
+                    {id:2,   name: "Lunch at Pho"},
+                    {id:3,   name: "Food Shopping"},
+                ];
+            }
+            
+            
+            render(){
+                return( 
+                <div className="jumbotron">
+                    <h1 className="display-3">{this.props.title}!</h1>
+                    <p className="lead">{this.props.text}.</p>
+                    <hr className="my-4"></hr>
+                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                    <p className="lead" className="btn btn-primary btn-lg" >{this.state.text}</p>
+                    <br/>
+                    <br/>
+                    <TodoForm  />
+                    <TodoList todos = {this.state.todos} />
+                </div>
+                
+                );
+            }
+           
+           changeText(e){
+                this.setState({text:e.target.value})
+           }
+        }
+        
+        Temp.defaultProps = {
+            title :"Hello World",
+            text  : "A lightweight, flexible component that can optionally extend the entire viewport to showcase key marketing messages on your site.",
+            link  : "http://www.google.fr",
+        
+        }
+        
+        Temp.propTypes = {
+            title : React.PropTypes.string.isRequired,
+        }
+        
+        class TodoForm extends React.Component {
+            
+            render(){
+                return <div>Todo Form</div>
+            }
+        }
+        
+
+        class TodoList extends React.Component {
+            render(){
+                return(<ul className="list-group">            
+                    {
+                        this.props.todos.map(todo=>{
+                            return <li className = "list-group-item" key={todo.id}>{todo.name}</li>
+                        }
+                        )
+                    }
+                </ul>)
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        ReactDOM.render(
+            <Temp />,
+            document.getElementById("root")
+        );
+    </script>
+
+</body>
+</html>
