@@ -71,9 +71,33 @@
         }
         
         class TodoForm extends React.Component {
+
+            constructor(props){
+                super(props);
+                this.onSubmit = this.onSubmit.bind(this);
+
+            }
             
             render(){
-                return <div>Todo Form</div>
+                return (
+                <div>
+                    <form onSubmit={this.onSubmit}>
+                        <div className="form-group">
+                            <label>Todo Text </label>
+                            <input type = "text" ref="text" onChange = {this.onChange} className = "form-control"/>
+                        </div>
+                    </form>
+                </div>)
+            }
+
+            onChange(){
+                console.log("Changing Text")
+            }
+
+            onSubmit(e){
+                e.preventDefault()
+                console.log(this)
+                console.log("Submit: " + this.refs.text.value)
             }
         }
         
